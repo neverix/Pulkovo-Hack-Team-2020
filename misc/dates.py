@@ -2,6 +2,7 @@ import datetime
 
 
 td = datetime.timedelta
+year = 2020
 
 
 def to_dt(year, dot_str):

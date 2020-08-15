@@ -4,9 +4,6 @@ from post import *
 from contextlib import redirect_stdout
 
 
-year = 2020
-
-
 def main():
     print("Читаю приложения...")
     calendar = read_1("data/Приложение №1.xlsx")

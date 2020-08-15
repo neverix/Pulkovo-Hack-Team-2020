@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Пулково интерфейс</title>
+    </head>
+    <body>
+        <h1>Интерфейс к программе для обработки данных учебного центра аэропорта "Пулково".</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% if token %}
+            Вы вошли в систему.
+            <a type=button href="/load">Загрузить данные по умолчанию</a>
+            <form enctype=multipart/form-data method="post">
+                <input type=file name=file>
+                <input type=submit formaction="upload/calendar" value="Загрузить годовой план-график обучения (Пр. 1)">
+                <input type=submit formaction="upload/facilities" value="Загрузить карту ресурсов (Пр. 2)">
+                <input type=submit formaction="upload/leaves" value="Загрузить таблицу отпусков (Пр. 5)">
+            </form>
+            <a type=button href="/compute">Произвести все необходимые вычисления</a>
+            <a type="button" href="/download/result" target="_blank">Скачать результат</a>
+            <a type="button" href="/download/report" target="_blank">Скачать отчет</a>
+        {% else %}
+            Вы еще не вошли в систему.
+            <a href="/new_session">Начать сессию.</a>
+        {% endif %}
+    </body>
+</html>

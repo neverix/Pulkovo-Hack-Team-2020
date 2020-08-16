@@ -4,7 +4,8 @@ from misc import weekdays, err_check
 
 
 def save_file(pairs, filename="out.xlsx"):
-    writer = pd.ExcelWriter(filename)
+    writer = pd.ExcelWriter(filename, engine="xlsxwriter")
+    workbook = writer.book
     for week, group in pairs.groupby(pairs.start.dt.isocalendar().week):
         week_name = f"W{week}"
         # очеловечиваем расписание
@@ -26,10 +27,19 @@ def save_file(pairs, filename="out.xlsx"):
 
         # сохраняем
         result.to_excel(writer, index=False, sheet_name=week_name)
+        worksheet = writer.sheets[week_name]
+
+        # раскрашиваем ряды с ошибками
+        format = workbook.add_format({"bg_color": "#ffbbbb"})
+        for type, dup, period in err_check(group):
+            day = period[0].strftime("%d.%m")
+            time = period[0].strftime('%H:%M')
+            for row in result[result["День"] == day][result["Начало"] == time].index:
+                worksheet.set_row(row, None, format)
 
         # расширяем столбцы, чтобы все вмещалось
-        worksheet = writer.sheets[week_name]
         for i, column in enumerate(result.columns):
             length = result[column].str.len().max()
-            worksheet.column_dimensions[get_column_letter(i + 1)].width = length + 5
+            letter = get_column_letter(i + 1)
+            worksheet.set_column(f"{letter}:{letter}", length + 5)
     writer.save()

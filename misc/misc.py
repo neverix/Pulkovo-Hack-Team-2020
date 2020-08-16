@@ -6,12 +6,11 @@ def duplicates(lst):
 
 
 def err_check(pairs):
-    # проверка на ошибки. в итоге не использовалась
+    # проверка на ошибки
     for period, group in pairs.groupby(["start", "end"]):
         auds = list(group.aud)
         for dup in duplicates(auds):
-            yield f"Накладка с аудиторией {dup} с {period[0]} до {period[1]}"
+            yield "aud", dup, period
         teachers = list(group.teachers)
         for dup in duplicates(teachers):
-            yield f"Накладка с учителем {dup} с {period[0]} до {period[1]}"
-
+            yield "teacher", dup, period

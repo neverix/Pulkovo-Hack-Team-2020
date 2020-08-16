@@ -1,6 +1,8 @@
 **/.~*
 *.exe
 *.msi
+report.txt
+out.xlsx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

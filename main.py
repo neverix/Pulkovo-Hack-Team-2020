@@ -7,6 +7,7 @@ from contextlib import redirect_stdout
 def main():
     print("Читаю приложения...")
     calendar = read_1("data/Приложение №1.xlsx")
+    # calendar = read_6("data/Приложение №6.xlsx")
     studies, classes, teachers = read_2("data/Приложение №2.xlsx")
     mat = read_5(year, teachers, "data/Приложение №5.xls")
     # curriculum = read_3_all("data/Приложение 3 (docx)")

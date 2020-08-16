@@ -32,6 +32,9 @@ class Session(object):
     def load_calendar(self, calendar_name):
         self.calendar = read_1(calendar_name)
 
+    def load_source(self, source_name):
+        self.calendar = read_6(source_name)
+
     def load_facilities(self, fac_name):
         self.studies, self.classes, self.teachers = read_2(fac_name)
 

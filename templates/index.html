@@ -21,7 +21,7 @@
 <body>
 <br>
 <div class="container">
-    <h2>Интерфейс к модулю планирования ресурсов учебного центра учебного центра аэропорта "Пулково".</h2>
+    <h2>Интерфейс к модулю планирования ресурсов учебного центра аэропорта "Пулково".</h2>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class=flashes>
@@ -45,6 +45,7 @@
                    value="Загрузить годовой план-график обучения (Пр. 1)"><br><br>
             <input type=submit formaction="upload/facilities" value="Загрузить карту ресурсов (Пр. 2)"><br><br>
             <input type=submit formaction="upload/leaves" value="Загрузить таблицу отпусков (Пр. 5)"><br><br>
+            <input type=submit formaction="upload/source" value="Загрузить исходный файл (Пр. 6)"><br><br>
         </form>
         <br>
     </div>

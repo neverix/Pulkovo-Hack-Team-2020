@@ -1,33 +1,69 @@
+<!doctype html>
 <html>
-    <head>
-        <title>Пулково интерфейс</title>
-    </head>
-    <body>
-        <h1>Интерфейс к программе для обработки данных учебного центра аэропорта "Пулково".</h1>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-        {% if token %}
-            Вы вошли в систему.
-            <a type=button href="/load">Загрузить данные по умолчанию</a>
-            <form enctype=multipart/form-data method="post">
-                <input type=file name=file>
-                <input type=submit formaction="upload/calendar" value="Загрузить годовой план-график обучения (Пр. 1)">
-                <input type=submit formaction="upload/facilities" value="Загрузить карту ресурсов (Пр. 2)">
-                <input type=submit formaction="upload/leaves" value="Загрузить таблицу отпусков (Пр. 5)">
-            </form>
-            <a type=button href="/compute">Произвести все необходимые вычисления</a>
-            <a type="button" href="/download/result" target="_blank">Скачать результат</a>
-            <a type="button" href="/download/report" target="_blank">Скачать отчет</a>
-        {% else %}
-            Вы еще не вошли в систему.
-            <a href="/new_session">Начать сессию.</a>
-        {% endif %}
-    </body>
+<head>
+    <title>Пулково интерфейс</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        a {
+            border-style: solid;
+            border-width : 0.5px;
+            text-decoration : none !important;
+            padding : 4px;
+            border-color : #000000;
+            border-radius: 2px;
+            background-color: #eeeeee;
+            color: black !important;
+        }
+    </style>
+</head>
+<body>
+<br>
+<div class="container">
+    <h2>Интерфейс к модулю планирования ресурсов учебного центра учебного центра аэропорта "Пулково".</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% if token %}
+    <p>Вы вошли в систему.</p>
+    <h3>Загрузка данных</h3>
+    <div class=container>
+        <br>
+
+        <a type=button href="/load">Загрузить данные по умолчанию</a>
+        <form enctype=multipart/form-data method="post">
+            <br>
+            <input type=file name=file><br><br>
+            <input type=submit formaction="upload/calendar"
+                   value="Загрузить годовой план-график обучения (Пр. 1)"><br><br>
+            <input type=submit formaction="upload/facilities" value="Загрузить карту ресурсов (Пр. 2)"><br><br>
+            <input type=submit formaction="upload/leaves" value="Загрузить таблицу отпусков (Пр. 5)"><br><br>
+        </form>
+        <br>
+    </div>
+    <h3>Обработка данных</h3>
+    <div class=container>
+        <br>
+        <a type=button href="/compute">Произвести все необходимые вычисления</a><br><br>
+        <br>
+    </div>
+    <h3>Результаты</h3>
+    <div class=container>
+        <br>
+        <a type="button" href="/download/result" target="_blank">Скачать результат</a><br><br>
+        <a type="button" href="/download/report" target="_blank">Скачать отчет</a><br><br>
+    </div>
+    {% else %}
+    <p>Вы еще не вошли в систему.</p>
+    <a href="/new_session">Начать сессию.</a>
+    {% endif %}
+</div>
+</body>
 </html>

@@ -67,7 +67,7 @@ def upload_calendar(session, name):
 
 @app.route("/upload/source", methods=["POST"])
 @upload
-def upload_calendar(session, name):
+def upload_source(session, name):
     session.load_source(name)
 
 

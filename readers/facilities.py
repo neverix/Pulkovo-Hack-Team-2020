@@ -9,6 +9,7 @@ def read_2(filename="data/Приложение №2.xlsx"):
     classes = pd.read_excel(filename, 1)
     teachers = pd.read_excel(filename, 2)
 
+    # меня не спрашивайте, не я писал
     studies = studies.loc[:, "Учебная программа":]
     for i in studies.columns:
         if i != 'Особенности проведения программы':

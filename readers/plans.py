@@ -4,9 +4,11 @@ from docx import Document
 
 
 def read_3 (fn, t):
+    # читаем один файл
     l = list()
     for i, row in enumerate(t.rows[2:]):
       d = dict()
+      # выделяем столбцы из таблицы
       d['Учебная программа'] = fn[:-4]
       d['Тема'] = row.cells[1].text
       if not d["Тема"] or not ("Тема" in d["Тема"] or "контроль" in d["Тема"].lower()):
@@ -14,16 +16,18 @@ def read_3 (fn, t):
       d['Лекция'] = row.cells[3].text
       d['Практика'] = row.cells[4].text
       l.append(d)
+    # превращаем в dataframe
     df = DataFrame(l, columns = ['Учебная программа', 'Тема', 'Лекция', 'Практика'])
     return df
 
 
 def read_3_all(dn="app3"):
-    #находим все файлы с учебными программами
+    # находим все файлы с учебными программами
     directory = dn
     files = os.listdir(directory)
     curriculum = DataFrame(columns=['Учебная программа', 'Тема', 'Лекция', 'Практика'])
     for file in files:
+      # читаем таблицу, добавляем к списку
       doc = Document(directory + '/' + file)
       table = doc.tables[0]
       df = read_3(file, table)

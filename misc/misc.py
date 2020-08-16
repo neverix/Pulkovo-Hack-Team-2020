@@ -6,6 +6,7 @@ def duplicates(lst):
 
 
 def err_check(pairs):
+    # проверка на ошибки. в итоге не использовалась
     for period, group in pairs.groupby(["start", "end"]):
         auds = list(group.aud)
         for dup in duplicates(auds):

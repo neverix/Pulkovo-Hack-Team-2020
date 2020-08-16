@@ -1,21 +1,27 @@
 def metrics(pairs, calendar, classes, teachers):
+    # создает отчет
     months = []
+    # по месяцам
     for month in range(1, 12 + 1):
         pair = pairs[pairs["start"].apply(lambda x: x.month == month)]
         clss = {}
+        # использование аудиторий (% от 28 дней в месяц, весь день пары)
         for _, cls in classes.iterrows():
             cls = cls["Аудитория"]
             clss[cls] = len(pair[pair["aud"] == cls]) / (4 * 28)
         events = {}
+        # считаем сколько прошло групп каждого типа
         for name, group in calendar.groupby("name"):
             # if type != '':
             #   name = f"{name}: {type}"
             events[name] = len(group[group["start"].apply(lambda x: int(x.split('.')[1]) == month)])
         hours = {}
+        # сколько часов работает каждый учитель
         for t, teacher in teachers.iterrows():
             teacher = teacher["Преподаватель"]
             hours[teacher] = len(pair[pair["teachers"] == teacher]) * 2
         months.append((clss, events, hours))
+    # считаем итог
     final_month = ({}, {}, {})
     for types in months:
         for i, objects in enumerate(types):

@@ -2,7 +2,7 @@
 Команда "Команда" - Pulkovo Hack 2020
 ## Инструкция по применению
 ```
-pip3 install numpy scipy pandas fuzzywuzzy flask openpyxl xlsxwriter xlrd
+pip3 install numpy scipy pandas fuzzywuzzy[speedup] flask openpyxl xlsxwriter xlrd
 FLASK_ENV=development python server.py
 ```
 ## API
